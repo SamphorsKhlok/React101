@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
 import React, {Component, createElement} from 'react';
+import './App.css';
 
 class App extends Component {
     state = {
         counter: 0,
     };
 
-    handleOnClick = (event) => {
-        const componentName = event.target.ariaLabel;
-        let counter = Number(event.target.value);
+    handleOnClick = (event: Event) => {
+        const element = event?.target as HTMLElement;
+        const componentId = element.getAttribute('id');
         this.setState({
-            counter: componentName === 'increment' ? counter + 1 : counter - 1,
+            counter: componentId === 'increment' ? this.state.counter + 1 : this.state.counter - 1,
         });
     }
 
-    handleInputChange = (event) => {
+    handleInputChange = (event: Event) => {
+        const inputElement = event?.target as HTMLInputElement;
         this.setState({
-            counter: Number(event.target.value),
+            counter: Number(inputElement.value),
         });
     }
 
@@ -28,22 +28,20 @@ class App extends Component {
             'React counter component.',
             createElement(
                 'br',
-                null,
-                null,
+                null
             ),
             createElement(
                 'input',
-                {onChange: event => this.handleInputChange(event)},
+                {onChange: (event: Event) => this.handleInputChange(event)},
                 null,
             ),
             createElement(
                 'br',
-                null,
-                null,
+                null
             ),
             createElement(
                 'button',
-                {onClick: event => this.handleOnClick(event), "aria-label": "decrement", value: this.state.counter},
+                {onClick: (event: Event) => this.handleOnClick(event), "id": "decrement"},
                 'decrement -1',
             ),
             createElement(
@@ -53,7 +51,7 @@ class App extends Component {
             ),
             createElement(
                 'button',
-                {onClick: event => this.handleOnClick(event), "aria-label": "increment", value: this.state.counter},
+                {onClick: (event: Event) => this.handleOnClick(event), "id": "increment"},
                 'increment +1',
             ),
         );
