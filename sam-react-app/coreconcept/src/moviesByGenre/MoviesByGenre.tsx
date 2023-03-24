@@ -1,8 +1,8 @@
-import React, {Component, createElement} from "react";
+import React, {Component, ChangeEvent} from "react";
 
 class MoviesByGenre extends Component {
     state = {
-        genre: ["All", "Documentary", "Comedy", "Horror", "Crime", "Adventure", "Action"],
+        genre: ["All", "Comedy", "Horror", "Crime", "Adventure", "Action"],
         selectedGenre: 'All',
         moviesMap: new Map([
             ['Kill bill', ["Crime", "Adventure", "Horror", "All"]],
@@ -12,51 +12,26 @@ class MoviesByGenre extends Component {
             ["War Lord", ["Comedy", "Crime", "All"]],
         ]),
     };
-    generateSelectOptions(){
-        return(
-            <select id="select-genre" value={this.state.selectedGenre} onChange={this.handleOptionChange}>
-                {this.state.genre.map((genre)=>(<option key={genre} value={genre}>{genre}</option>))}
-            </select>
-        );
-    }
-
-    handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    handleOptionChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const value = event?.target.value ?? "All";
         this.setState({
             selectedGenre: value,
         });
     }
-
-    generateMovieListByGenre(){
-        return(
+    render(){
+        return <div>
+            <p>-------------- Genre select component --------------</p>
+            <select id="select-genre" value={this.state.selectedGenre} onChange={this.handleOptionChange}>
+                {this.state.genre.map((genre)=>(<option key={genre} value={genre}>{genre}</option>))}
+            </select>
             <ul>
-                {Array.from(this.state.moviesMap.keys()).filter((key)=>(this.state.moviesMap.get(key)?.includes(this.state.selectedGenre))).map((movie) => (
-                    <li key={movie}><b>{movie}</b> ({this.state.moviesMap.get(movie)?.join(", ")})</li>
+                {Array.from(this.state.moviesMap.keys()).filter((title)=>(this.state.moviesMap.get(title)?.includes(this.state.selectedGenre))).map((title) => (
+                    <li key={title}><b>{title}</b> ({this.state.moviesMap.get(title)?.join(", ")})</li>
                 ))}
             </ul>
-        );
-    }
-    render(){
-        return createElement(
-            "div",
-            null,
-            '-------------- Genre select component -------------- ',
-            createElement(
-                'br',
-                null
-            ),
-            this.generateSelectOptions(),
-            this.generateMovieListByGenre(),
-            createElement(
-                'div',
-                null,
-                '--------------  end of genre select component -------------- ',
-            ),
-            createElement(
-                'br',
-                null
-            ),
-        )
+            <p>--------------  end of genre select component --------------</p>
+            <br/>
+        </div>
     }
 }
 export default MoviesByGenre

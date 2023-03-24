@@ -1,10 +1,13 @@
-import React, {Component, createElement} from "react";
+import React, {Component, createElement, KeyboardEvent} from "react";
 
 class SearchForm extends Component {
-    handleOnClick = (event: Event) => {
+    state = {
+        keyword:"",
+    };
+    handleOnClick = () => {
         this.searchOperation();
     }
-    handleKeyDown = (event: KeyboardEvent) => {
+    handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
         if(event.key === "Enter"){
             this.searchOperation();
         }
@@ -17,35 +20,13 @@ class SearchForm extends Component {
         console.log("searching for " + keyword);
     }
     render(){
-        return createElement(
-            "div",
-            null,
-            '-------------- Search form component -------------- ',
-            createElement(
-                'br',
-                null
-            ),
-            createElement(
-                'input',
-                {onKeyDown: (event: KeyboardEvent) => this.handleKeyDown(event), "id":"searchKeyword"},
-                null,
-            ),
-            createElement(
-                'button',
-                {onClick: (event: Event) => this.handleOnClick(event), "id": "searchButton"},
-                'Search',
-            ),
-            createElement(
-                'div',
-                null,
-                '--------------  end of search form component -------------- ',
-            ),
-            createElement(
-                'br',
-                null
-            )
-        );
+        return <div>
+            <p>-------------- Search form component --------------</p>
+            <input id='searchKeyword' onKeyDown={this.handleKeyDown} />
+            <button id='searchButton' onClick={this.handleOnClick}>Search</button>
+            <p>--------------  end of search form component --------------</p>
+            <br/>
+        </div>
     }
 }
-
 export default SearchForm
