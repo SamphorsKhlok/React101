@@ -1,32 +1,30 @@
-import React, {Component, createElement} from "react";
+import React, {ChangeEvent, Component, createElement} from "react";
 
-class Counter extends Component {
-    state = {
-        counter: 0,
-    };
-    handleOnClick = (event: Event) => {
-        const element = event?.target as HTMLElement;
-        const componentId = element.getAttribute('id');
-        switch(componentId){
-            case 'increment':
-                this.setState({
-                    counter: this.state.counter + 1,
-                });
-                break;
-            case 'decrement':
-                this.setState({
-                    counter: this.state.counter - 1,
-                });
-                break;
-            default:
-                throw Error('Unknown action');
-        }
+type CounterComponentState = {
+    counter: number;
+}
+class Counter extends Component<any, CounterComponentState> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            counter:0
+        };
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
-    handleInputChange = (event: Event) => {
-        const inputElement = event?.target as HTMLInputElement;
+    handleInputChange = (event:ChangeEvent<HTMLInputElement>) => {
         this.setState({
-            counter: Number(inputElement.value),
+            counter: Number(event.target.value),
         });
+    }
+    increment = ()=>{
+        this.setState((previousState) => ({
+            counter: previousState.counter + 1,
+        }));
+    }
+    decrement = ()=>{
+        this.setState((previousState) => ({
+            counter: previousState.counter - 1,
+        }));
     }
     render(){
         return createElement(
@@ -39,7 +37,7 @@ class Counter extends Component {
             ),
             createElement(
                 'input',
-                {onChange: (event: Event) => this.handleInputChange(event)},
+                {onChange: this.handleInputChange},
                 null,
             ),
             createElement(
@@ -48,7 +46,7 @@ class Counter extends Component {
             ),
             createElement(
                 'button',
-                {onClick: (event: Event) => this.handleOnClick(event), "id": "decrement"},
+                {onClick: this.decrement},
                 'decrement -1',
             ),
             createElement(
@@ -58,7 +56,7 @@ class Counter extends Component {
             ),
             createElement(
                 'button',
-                {onClick: (event: Event) => this.handleOnClick(event), "id": "increment"},
+                {onClick: this.increment},
                 'increment +1',
             ),
             createElement(

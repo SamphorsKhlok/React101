@@ -1,29 +1,44 @@
-import React, {Component, createElement, KeyboardEvent} from "react";
+import React, {ChangeEvent, Component, KeyboardEvent} from "react";
 
-class SearchForm extends Component {
-    state = {
-        keyword:"",
-    };
+type SearchFormComponentState = {
+    keyword: string;
+}
+type SearchFormComponentProps = {
+    initialQuery: string;
+    onSearch: (keyword: string)=> void;
+}
+class SearchForm extends Component<SearchFormComponentProps, SearchFormComponentState> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            keyword:"",
+        };
+
+        this.updateKeyword = this.updateKeyword.bind(this);
+    }
     handleOnClick = () => {
-        this.searchOperation();
+        this.onSearch();
     }
     handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+        console.log(event.key);
         if(event.key === "Enter"){
-            this.searchOperation();
+            this.onSearch();
         }
     }
-    searchOperation(){
-        const searchKeywordElement = document.getElementById("searchKeyword") as HTMLInputElement;
-        this.onSearch(searchKeywordElement.value);
+    onSearch(){
+        this.props.onSearch(this.state.keyword);
     }
-    onSearch(keyword: string){
-        console.log("searching for " + keyword);
+    updateKeyword(event: ChangeEvent<HTMLInputElement> ){
+        this.setState({
+            keyword: event.target.value
+        })
     }
     render(){
         return <div>
             <p>-------------- Search form component --------------</p>
-            <input id='searchKeyword' onKeyDown={this.handleKeyDown} />
-            <button id='searchButton' onClick={this.handleOnClick}>Search</button>
+            <input defaultValue={this.props.initialQuery} onChange={this.updateKeyword}
+                   onKeyDown={this.handleKeyDown} />
+            <button type="button" onClick={this.handleOnClick}>Search</button>
             <p>--------------  end of search form component --------------</p>
             <br/>
         </div>
