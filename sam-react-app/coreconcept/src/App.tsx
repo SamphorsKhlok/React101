@@ -28,7 +28,8 @@ class App extends Component<any, AppComponentState> {
     }
     render() {
         return <div>
-            <Counter />
+            learn react
+            <Counter initialValue="10"/>
             <SearchForm
                 initialQuery="type here..."
                 onSearch={this.onSearchCallback}

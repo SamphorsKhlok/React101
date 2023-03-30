@@ -24,7 +24,7 @@ class MoviesByGenre extends Component<MoviesByGenreComponentProps, MoviesByGenre
     render(){
         return <div>
             <p>-------------- Genre select component --------------</p>
-            <select id="select-genre" value={this.props.selectedGenre} onChange={this.props.onSelect}>
+            <select role="select" id="select-genre" value={this.props.selectedGenre} onChange={this.props.onSelect}>
                 {this.props.genreList.map((genre)=>(<option key={genre} value={genre}>{genre}</option>))}
             </select>
             <ul>

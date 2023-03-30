@@ -3,11 +3,14 @@ import React, {ChangeEvent, Component, createElement} from "react";
 type CounterComponentState = {
     counter: number;
 }
+type CounterComponentProps = {
+    initialValue: string;
+}
 class Counter extends Component<any, CounterComponentState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            counter:0
+            counter: Number(props.initialValue) ?? 0,
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -37,7 +40,7 @@ class Counter extends Component<any, CounterComponentState> {
             ),
             createElement(
                 'input',
-                {onChange: this.handleInputChange},
+                {onChange: this.handleInputChange, value: this.props.initialValue},
                 null,
             ),
             createElement(

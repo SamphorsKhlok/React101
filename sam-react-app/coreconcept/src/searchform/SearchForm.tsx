@@ -8,7 +8,7 @@ type SearchFormComponentProps = {
     onSearch: (keyword: string)=> void;
 }
 class SearchForm extends Component<SearchFormComponentProps, SearchFormComponentState> {
-    constructor(props: any) {
+    constructor(props: SearchFormComponentProps) {
         super(props);
         this.state = {
             keyword:"",
@@ -17,16 +17,12 @@ class SearchForm extends Component<SearchFormComponentProps, SearchFormComponent
         this.updateKeyword = this.updateKeyword.bind(this);
     }
     handleOnClick = () => {
-        this.onSearch();
+        this.props.onSearch(this.state.keyword);
     }
     handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-        console.log(event.key);
         if(event.key === "Enter"){
-            this.onSearch();
+            this.props.onSearch(this.state.keyword);
         }
-    }
-    onSearch(){
-        this.props.onSearch(this.state.keyword);
     }
     updateKeyword(event: ChangeEvent<HTMLInputElement> ){
         this.setState({
@@ -36,7 +32,7 @@ class SearchForm extends Component<SearchFormComponentProps, SearchFormComponent
     render(){
         return <div>
             <p>-------------- Search form component --------------</p>
-            <input defaultValue={this.props.initialQuery} onChange={this.updateKeyword}
+            <input type="textbox" defaultValue={this.props.initialQuery} onChange={this.updateKeyword}
                    onKeyDown={this.handleKeyDown} />
             <button type="button" onClick={this.handleOnClick}>Search</button>
             <p>--------------  end of search form component --------------</p>
