@@ -6,13 +6,12 @@ type CounterComponentState = {
 type CounterComponentProps = {
     initialValue: string;
 }
-class Counter extends Component<any, CounterComponentState> {
+class Counter extends Component<CounterComponentProps, CounterComponentState> {
     constructor(props: any) {
         super(props);
         this.state = {
             counter: Number(props.initialValue) ?? 0,
         };
-        this.handleInputChange = this.handleInputChange.bind(this);
     }
     handleInputChange = (event:ChangeEvent<HTMLInputElement>) => {
         this.setState({
@@ -40,7 +39,7 @@ class Counter extends Component<any, CounterComponentState> {
             ),
             createElement(
                 'input',
-                {onChange: this.handleInputChange, value: this.props.initialValue},
+                {onChange: this.handleInputChange, value: this.state.counter},
                 null,
             ),
             createElement(

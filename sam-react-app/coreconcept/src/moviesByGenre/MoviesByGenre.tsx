@@ -22,13 +22,15 @@ class MoviesByGenre extends Component<MoviesByGenreComponentProps, MoviesByGenre
         };
     }
     render(){
+        let moviesBySelectedGenre = Array.from(this.state.moviesMap.keys()).filter((title)=>
+            this.state.moviesMap.get(title)?.includes(this.props.selectedGenre));
         return <div>
             <p>-------------- Genre select component --------------</p>
             <select role="select" id="select-genre" value={this.props.selectedGenre} onChange={this.props.onSelect}>
                 {this.props.genreList.map((genre)=>(<option key={genre} value={genre}>{genre}</option>))}
             </select>
             <ul>
-                {Array.from(this.state.moviesMap.keys()).filter((title)=>(this.state.moviesMap.get(title)?.includes(this.props.selectedGenre))).map((title) => (
+                {moviesBySelectedGenre.map((title) => (
                     <li key={title}><b>{title}</b> ({this.state.moviesMap.get(title)?.join(", ")})</li>
                 ))}
             </ul>

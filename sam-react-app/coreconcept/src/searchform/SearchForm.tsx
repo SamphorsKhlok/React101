@@ -11,10 +11,8 @@ class SearchForm extends Component<SearchFormComponentProps, SearchFormComponent
     constructor(props: SearchFormComponentProps) {
         super(props);
         this.state = {
-            keyword:"",
+            keyword: this.props.initialQuery ?? "",
         };
-
-        this.updateKeyword = this.updateKeyword.bind(this);
     }
     handleOnClick = () => {
         this.props.onSearch(this.state.keyword);
@@ -24,7 +22,7 @@ class SearchForm extends Component<SearchFormComponentProps, SearchFormComponent
             this.props.onSearch(this.state.keyword);
         }
     }
-    updateKeyword(event: ChangeEvent<HTMLInputElement> ){
+    updateKeyword = (event: ChangeEvent<HTMLInputElement> ) => {
         this.setState({
             keyword: event.target.value
         })
@@ -32,7 +30,7 @@ class SearchForm extends Component<SearchFormComponentProps, SearchFormComponent
     render(){
         return <div>
             <p>-------------- Search form component --------------</p>
-            <input type="textbox" defaultValue={this.props.initialQuery} onChange={this.updateKeyword}
+            <input type="textbox" value={this.state.keyword} onChange={this.updateKeyword}
                    onKeyDown={this.handleKeyDown} />
             <button type="button" onClick={this.handleOnClick}>Search</button>
             <p>--------------  end of search form component --------------</p>
