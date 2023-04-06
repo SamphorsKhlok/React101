@@ -24,7 +24,7 @@ class SearchForm extends Component<SearchFormComponentProps, SearchFormComponent
     }
     updateKeyword = (event: ChangeEvent<HTMLInputElement> ) => {
         this.setState({
-            keyword: event.target.value
+            keyword: event.target.value,
         })
     }
     render(){

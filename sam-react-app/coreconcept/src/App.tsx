@@ -16,13 +16,11 @@ class App extends Component<any, AppComponentState> {
             selectedGenre: 'All',
         };
     }
-    onSelectCallback = (event: ChangeEvent<HTMLSelectElement>) => {
-        const value = event?.target.value ?? "All";
+    onSelectCallback = (value: string) => {
         this.setState({
             selectedGenre: value,
         });
     }
-
     onSearchCallback = (keyword: string) => {
         console.log(keyword);
     }
