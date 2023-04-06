@@ -4,7 +4,7 @@ type MoviesByGenreComponentState = {
     moviesMap: Map<string, string[]>;
     selectedGenre: string;
 }
-type MoviesByGenreComponentProps = {
+export type MoviesByGenreComponentProps = {
     genreList: string[];
     selectedGenre: string;
     onSelect: (value:string)=> void;
