@@ -11,7 +11,7 @@ class SearchForm extends Component<SearchFormComponentProps, SearchFormComponent
     constructor(props: SearchFormComponentProps) {
         super(props);
         this.state = {
-            keyword: this.props.initialQuery ?? "",
+            keyword: this.props.initialQuery,
         };
     }
     handleOnClick = () => {

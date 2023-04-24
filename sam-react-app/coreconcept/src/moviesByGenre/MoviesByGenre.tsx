@@ -32,7 +32,7 @@ class MoviesByGenre extends Component<MoviesByGenreComponentProps, MoviesByGenre
     }
     render(){
         let moviesBySelectedGenre = Array.from(this.state.moviesMap.keys()).filter((title)=>
-            this.state.moviesMap.get(title)?.includes(this.state.selectedGenre));
+            this.state.moviesMap.get(title)!.includes(this.state.selectedGenre));
         return <div>
             <p>-------------- Genre select component --------------</p>
             <select role="select" id="select-genre" value={this.state.selectedGenre} onChange={this.handleOnChange}>
@@ -40,7 +40,7 @@ class MoviesByGenre extends Component<MoviesByGenreComponentProps, MoviesByGenre
             </select>
             <ul>
                 {moviesBySelectedGenre.map((title) => (
-                    <li key={title}><b>{title}</b> ({this.state.moviesMap.get(title)?.join(", ")})</li>
+                    <li key={title}><b>{title}</b> ({this.state.moviesMap.get(title)!.join(", ")})</li>
                 ))}
             </ul>
             <p>--------------  end of genre select component --------------</p>

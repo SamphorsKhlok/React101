@@ -1,0 +1,22 @@
+#dialog-root {
+    position: relative;
+    z-index: 999;
+}
+
+.dialogContainer {
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: block;
+    text-align: center;
+    justify-content: center;
+}
+
+.dialogHeader, .dialogBody {
+    background-color: white;
+    display: inline-flex;
+    width: 60%;
+}
