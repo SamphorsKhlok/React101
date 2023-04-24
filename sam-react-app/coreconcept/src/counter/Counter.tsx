@@ -10,7 +10,7 @@ class Counter extends Component<CounterComponentProps, CounterComponentState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            counter: Number(props.initialValue) ?? 0,
+            counter: Number(props.initialValue),
         };
     }
     handleInputChange = (event:ChangeEvent<HTMLInputElement>) => {
