@@ -44,8 +44,10 @@ class Dialog extends Component<DialogComponentProps> {
                        containerElements={[this.modalRef.current as HTMLElement]}>
                 <div ref={this.modalRef} className="dialogContainer">
                     <div className="dialogHeader">
-                        <h2>{this.props.title}</h2>
-                        <span><button ref={this.focusableRef}  tabIndex={-1} onClick={this.props.onDialogClose}>X</button></span>
+                        <div className="title"><h2>{this.props.title}</h2></div>
+                        <div className="closeButtonContainer">
+                            <button className="closeButton" ref={this.focusableRef}  tabIndex={-1} onClick={this.props.onDialogClose}>X</button>
+                        </div>
                     </div>
                     <div className="dialogBody">{this.props.children}</div>
                 </div>

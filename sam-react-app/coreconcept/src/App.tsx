@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
-import SearchForm from "./searchform/SearchForm";
-import Counter from "./counter/Counter";
-import MoviesByGenre from "./moviesByGenre/MoviesByGenre";
 import Dialog from "./dialog/Dialog";
-import MovieForm, {ActionType} from "./movieForm/MovieForm";
+import MovieForm from "./movieForm/MovieForm";
+import DeleteMovieForm from "./deleteMovieForm/DeleteMovieForm";
+import {MovieType} from "./common/types";
 
 type AppComponentState = {
     genreList: string[];
@@ -42,29 +41,30 @@ class App extends Component<any, AppComponentState> {
     }
 
     render() {
-        const dialogContent = this.state.isDialogOpen ? (
+        const dialogContent = this.state.isDialogOpen && (
             <Dialog title="Default dialog title" onDialogClose={this.toggleDialog}>
                 <div>This is a default dialog body.</div>
             </Dialog>
-        ) : null;
-        return <div>
+        );
+        const initialMovie: MovieType = {
+            title: "John Wick",
+            url: "xyz",
+            releaseDate: "2023",
+            rating: 8,
+            duration: 250,
+            description: "One of the best action movie",
+            genre: ["Action", "Thriller"],
+        }
+        return <div className="appBackground">
             learn react
-            <Counter initialValue="10"/>
-            <SearchForm
-                initialQuery="type here..."
-                onSearch={this.onSearchCallback}
-            />
-            <MoviesByGenre
-                genreList={this.state.genreList}
-                selectedGenre={this.state.selectedGenre}
-                onSelect={this.onSelectCallback}
-            />
             <div>
                 <p>toggle dialog</p>
                 <button onClick={this.toggleDialog}>toggle generic dialog</button>
                 {dialogContent}
             </div>
-            <MovieForm initialMovieInfo={null} callbackSubmitAction={this.addMovieAction} actionType={ActionType.ADD} />
+            <MovieForm initialMovieInfo={initialMovie} callbackSubmitAction={this.addMovieAction} />
+            <MovieForm initialMovieInfo={null} callbackSubmitAction={this.addMovieAction} />
+            <DeleteMovieForm initialMovieInfo={null} callbackSubmitAction={this.addMovieAction} />
         </div>
     }
 }

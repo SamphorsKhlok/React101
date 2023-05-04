@@ -1,0 +1,54 @@
+.button {
+    background: #F65261;
+    border-radius: 5px;
+    border: 0px;
+    height: 50px;
+    width: 200px;
+    font-family: 'Montserrat';
+    font-size: 20px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.buttonContainer{
+    padding: 10px;
+    text-align: end;
+}
+
+.form{
+    width: 100%;
+}
+
+.col50{
+    width: 100%;
+    column-count: 2;
+    column-gap: 10px;
+}
+
+.col100{
+    width: 100%;
+    column-count: 1;
+}
+
+label {
+    color: #F65261;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+input {
+    width: 95%;
+    height: 30px;
+    background-color: #323232;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.fieldBlock {
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
